@@ -1,4 +1,33 @@
+@use "null";
 @use "fonts";
 @use "ui";
 @use "components";
 
+.preview {
+    background-image: url(../img/banner.webp);
+    background-size: cover;
+}
+
+.preview-title {
+  text-transform: uppercase;  
+}
+
+a {
+    color: #fff;
+}
+
+
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    border: 2px solid #fff;
+    border-radius: 4px;
+    text-decoration: none;
+    color: #fff;
+    transition: all 0.3s ease;
+}
+
+.button:hover {
+    background-color: #fff;
+    color: #000;
+}

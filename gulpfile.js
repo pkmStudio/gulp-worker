@@ -1,20 +1,20 @@
-// 🔹 Импорт необходимых модулей
 import gulp from "gulp";
 import fileInclude from "gulp-file-include";
 import * as sass from "sass";
 import gulpSass from "gulp-sass";
 import rename from "gulp-rename";
 import postcss from "gulp-postcss";
-import autoprefixer from "autoprefixer"; // ✅ Используем PostCSS-версию
+import autoprefixer from "autoprefixer";
 import cleanCSS from "gulp-clean-css";
 import webp from "gulp-webp";
 import newer from "gulp-newer";
 import webpack from "webpack-stream";
 import svgmin from "gulp-svgmin";
-import browserSync from "browser-sync";  
+import browserSync from "browser-sync";
+import { deleteAsync } from "del";
 
 const { src, dest, watch, series, parallel } = gulp;
-const compileSass = gulpSass(sass); // Используем `gulp-sass` с `dart-sass`
+const compileSass = gulpSass(sass);
 const bs = browserSync.create();
 
 // 🔹 Пути к файлам
@@ -24,8 +24,11 @@ const paths = {
     js: "src/assets/js/main.js",
     images: "src/assets/img/**/*.{png,jpg}",
     fonts: "src/assets/fonts/**/*",
-    svg: "src/assets/img/svg/**/*.svg"
+    svg: "src/assets/img/svg/**/*.svg",
 };
+
+// 🔹 Очистка папки `dist/` перед сборкой
+const cleanDist = () => deleteAsync(["dist"]); // 📌 Удаляет всю папку `dist/`
 
 // 🔹 Обработка HTML
 const html = () =>
@@ -36,8 +39,8 @@ const html = () =>
 // 🔹 Обработка SCSS → CSS
 const styles = () =>
     src(paths.scss)
-        .pipe(compileSass().on("error", compileSass.logError)) // Компиляция SCSS
-        .pipe(postcss([autoprefixer()])) // ✅ Заменили `gulp-autoprefixer` на PostCSS
+        .pipe(compileSass().on("error", compileSass.logError))
+        .pipe(postcss([autoprefixer()]))
         .pipe(dest("dist/assets/css"))
         .pipe(cleanCSS({ level: 2 }))
         .pipe(rename({ suffix: ".min" }))
@@ -45,19 +48,20 @@ const styles = () =>
 
 // 🔹 Оптимизация изображений (WebP)
 const images = () =>
-    src(paths.images)
+    src(paths.images, { encoding: false })
+        .pipe(dest("dist/assets/img"))       
         .pipe(newer("dist/assets/img"))
         .pipe(webp())
         .pipe(dest("dist/assets/img"));
 
 // 🔹 Копирование шрифтов
 const fonts = () =>
-    src(paths.fonts)
+    src(paths.fonts, { encoding: false })
         .pipe(dest("dist/assets/fonts"));
 
 // 🔹 Оптимизация SVG
 const svg = () =>
-    src(paths.svg)
+    src(paths.svg, { encoding: false })
         .pipe(svgmin())
         .pipe(dest("dist/assets/img/svg"));
 
@@ -86,21 +90,20 @@ const watchFiles = () => {
 // 🔹 Запуск сервера
 const serve = () => {
     bs.init({
-        server: "dist", // Указываем `dist` как корневую папку
-        notify: false, // Отключаем уведомления
-        open: false, // Не открывать браузер автоматически
-        ui: false
+        server: "dist",
+        notify: false,
+        open: false,
+        ui: false,
     });
 
-    watch("dist/**/*.html").on("change", bs.reload); // Следим за HTML
-    watch("dist/assets/css/*.css").on("change", bs.reload); // Следим за CSS
-    watch("dist/assets/js/*.js").on("change", bs.reload); // Следим за JS
-}
+    watch("dist/**/*.html").on("change", bs.reload);
+    watch("dist/assets/css/*.css").on("change", bs.reload);
+    watch("dist/assets/js/*.js").on("change", bs.reload);
+};
 
-// 🔹 Экспорт задач
+// 🔹 Экспорт задач с очисткой перед сборкой
 export default series(
-    parallel(html, styles, images, fonts, svg, scripts),
-    parallel(serve, watchFiles)
+    cleanDist, // 📌 Сначала очищаем `dist/`
+    parallel(html, styles, images, fonts, svg, scripts), // 📌 Затем запускаем сборку
+    parallel(serve, watchFiles) // 📌 Потом сервер и слежку за файлами
 );
-
-

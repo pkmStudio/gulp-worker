@@ -1,0 +1,76 @@
+* {
+	padding: 0px;
+	margin: 0px;
+	border: 0px;
+}
+*,
+*:before,
+*:after {
+	box-sizing: border-box;
+}
+a:focus,
+a:active {
+	outline: none;
+}
+input,
+button,
+textarea {
+	font-size: inherit;
+}
+button {
+	cursor: pointer;
+	color: inherit;
+	background-color: inherit;
+}
+a {
+	color: inherit;
+}
+a:link,
+a:visited {
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: none;
+}
+ul li {
+	list-style: none;
+}
+img {
+	vertical-align: top;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-weight: inherit;
+	font-size: inherit;
+}
+// Обнуление и общие параметры
+body {
+	// Скролл заблокирован
+	.lock & {
+		overflow: hidden;
+		touch-action: none;
+	}
+	// Сайт загружен
+	.loaded & {
+	}
+}
+  
+// Оболочка
+.wrapper {
+	min-height: 100%;
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+	// Прижимаем footer
+	> main {
+		flex: 1 1 auto;
+	}
+	// Фикс для слайдеров
+	> * {
+		min-width: 0;
+	}
+}
