@@ -75,6 +75,10 @@ const scripts = () =>
                 module: {
                     rules: [{ test: /\.js$/, exclude: /node_modules/, use: "babel-loader" }],
                 },
+                optimization: {
+                    usedExports: true,
+                    minimize: true, // ❌ Отключить минификацию - false
+                },
             })
         )
         .pipe(dest("dist/assets/js"));
@@ -103,7 +107,7 @@ const serve = () => {
 
 // 🔹 Экспорт задач с очисткой перед сборкой
 export default series(
-    cleanDist, // 📌 Сначала очищаем `dist/`
-    parallel(html, styles, images, fonts, svg, scripts), // 📌 Затем запускаем сборку
+    cleanDist, // 📌 Сначала очищает `dist/`
+    parallel(html, styles, images, fonts, svg, scripts), // 📌 Затем запускает сборку
     parallel(serve, watchFiles) // 📌 Потом сервер и слежку за файлами
 );
