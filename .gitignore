@@ -1,0 +1,27 @@
+# Исключаем папку node_modules (зависимости)
+node_modules/
+
+# Игнорируем файлы, созданные npm
+package-lock.json
+
+# Исключаем папку dist (собранные файлы)
+dist/
+
+# Исключаем файлы настроек системы
+.DS_Store
+Thumbs.db
+
+# Исключаем временные файлы редакторов
+*.log
+*.swp
+*.swo
+.idea/
+.vscode/
+
+# Исключаем файлы кэша Gulp и Webpack
+.cache/
+.pnp.cjs
+.pnp.loader.mjs
+
+# Игнорируем файлы, которые создаёт Webpack при сборке
+webpack-stats.json

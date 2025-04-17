@@ -1,0 +1,6 @@
+._container {
+    max-width: 160rem; /* 2560/16 */
+    margin: 0 auto;
+    padding-left: clamp(1rem, 2vw, 10rem);
+    padding-right: clamp(1rem, 2vw, 10rem);
+}
