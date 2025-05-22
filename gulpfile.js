@@ -40,7 +40,13 @@ const html = () =>
 const styles = () =>
     src(paths.scss)
         .pipe(compileSass().on("error", compileSass.logError))
-        .pipe(postcss([autoprefixer()]))
+        .pipe(postcss([
+            autoprefixer(),
+            combineMediaQuery(), // Объединяет одинаковые медиа-запросы
+            sortMediaQueries({
+                sort: 'mobile-first' // или 'desktop-first'
+              }),  // Сортирует медиа-запросы (по возрастанию или убыванию)
+        ]))
         .pipe(dest("dist/assets/css"))
         .pipe(cleanCSS({ level: 2 }))
         .pipe(rename({ suffix: ".min" }))
@@ -77,7 +83,7 @@ const scripts = () =>
                 },
                 optimization: {
                     usedExports: true,
-                    minimize: true, // ❌ Отключить минификацию - false
+                    minimize: false, // ❌ Отключить минификацию - false
                 },
             })
         )
