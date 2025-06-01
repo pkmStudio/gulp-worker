@@ -4,6 +4,8 @@ import * as sass from "sass";
 import gulpSass from "gulp-sass";
 import rename from "gulp-rename";
 import postcss from "gulp-postcss";
+import combineMediaQuery from "postcss-combine-media-query";
+import sortMediaQueries from "postcss-sort-media-queries";
 import autoprefixer from "autoprefixer";
 import cleanCSS from "gulp-clean-css";
 import webp from "gulp-webp";

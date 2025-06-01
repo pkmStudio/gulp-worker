@@ -5,3 +5,10 @@
 5. Основной шрифт подключить через плагин google fonts
 6. Заполнить ui.scss и style.scss
 7. Начать верстать компонентно.
+
+
+// TODO for self 
+Добавить поддержку
+"swiper": "latest",
+"gulp-ttf2woff": "latest",
+"gulp-ttf2woff2": "latest",
