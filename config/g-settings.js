@@ -1,4 +1,4 @@
-import * as nodePath from 'path';
+import * as nodePath from "path";
 
 const rootFolder = nodePath.basename(nodePath.resolve());
 const buildFolder = `./dist`;
@@ -15,7 +15,7 @@ export const paths = {
         svg: `${srcFolder}/assets/img/svg/**/*.svg`,
     },
     build: {
-        html: `${buildFolder}/*.html`,
+        html: `${buildFolder}/`,
         css: `${buildFolder}/assets/css/`,
         js: `${buildFolder}/assets/js/`,
         images: `${buildFolder}/assets/img/`,

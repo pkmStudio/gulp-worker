@@ -1,4 +1,4 @@
-import svgmin from 'gulp-svgmin'
+import svgmin from "gulp-svgmin"
 
 // Оптимизация SVG
 export const svg = () =>

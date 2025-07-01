@@ -3,8 +3,8 @@ import combineMediaQuery from "postcss-combine-media-query";
 import sortMediaQueries from "postcss-sort-media-queries";
 import autoprefixer from "autoprefixer";
 import cleanCSS from "gulp-clean-css";
-import gulpSass from 'gulp-sass'
-import * as sass from 'sass'
+import gulpSass from "gulp-sass"
+import * as sass from "sass"
 
 const compileSass = gulpSass(sass);
 
@@ -16,14 +16,14 @@ export const styles = () =>
             autoprefixer(),
             combineMediaQuery(), // Объединяет одинаковые медиа-запросы
             sortMediaQueries({
-                sort: 'mobile-first' // или 'desktop-first'
+                sort: "mobile-first" // или "desktop-first"
             }),  // Сортирует медиа-запросы (по возрастанию или убыванию)
         ]))
         .pipe(app.plugins.prettier({
-            'tabWidth': 4,
-            'useTabs': true,
-            'semi': true,
-            'singleQuote': false,
+            "tabWidth": 4,
+            "useTabs": true,
+            "semi": true,
+            "singleQuote": false,
         }))
         .pipe(app.gulp.dest(app.paths.build.css))
         .pipe(cleanCSS({ level: 2 }))
