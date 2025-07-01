@@ -27,12 +27,6 @@ body {
     color: var(--light);
 }
 
-._container {
-    max-width: 2560px;
-    margin: 0 auto;
-    padding: 0 3.125vw;
-}
-
 ._h1 {
     font-size: clamp(1rem, 4.3vw, 6.875rem  /* 110/16 */);
     line-height: 120%;

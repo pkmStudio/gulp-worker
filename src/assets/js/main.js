@@ -25,3 +25,5 @@ pkmFunctions.addTouchClass();
 // pkmFunctions.addLoadedClass();
 /* Модуль для работы с меню (Бургер) */
 // pkmFunctions.menuInit();
+
+import '../components/accordion/accordion.js';

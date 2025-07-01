@@ -1,6 +1,16 @@
 @@include("header/header.html") <!-- ✅ Подключаем хедер -->
 <main class="main">
-  
+    <div class="accordion">
+        @@include("accordion/accordion.html", {
+        "title": "1",
+        "description": "lorem ipsum dolor sit amet",
+        })
+
+        @@include("accordion/accordion.html", {
+        "title": "2",
+        "description": "lorem ipsum dolor sit amet",
+        })
+    </div>
 </main>
 <script src="assets/js/main.js"></script>
 @@include("footer/footer.html") <!-- ✅ Подключаем футер -->

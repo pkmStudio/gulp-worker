@@ -1,0 +1,82 @@
+.accordion__item {
+  border-bottom: 1px solid black;
+}
+
+.accordion__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  padding: 1.5rem 0;
+}
+
+.accordion__title {
+  color: black;
+  font-size: 2rem;
+  font-weight: bold;
+  font-family: 'Inter', sans-serif;
+  text-transform: uppercase;
+  line-height: 130%;
+}
+
+.accordion__button {
+  position: relative;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.5s ease;
+}
+
+.accordion__icon {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.3s ease;
+}
+
+.accordion__icon--default {
+  opacity: 1;
+}
+
+.accordion__icon--hover {
+  opacity: 0;
+}
+
+.accordion__button:hover .accordion__icon--default {
+  opacity: 0;
+}
+
+.accordion__button:hover .accordion__icon--hover {
+  opacity: 1;
+}
+
+.accordion__content {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition:
+          max-height 0.5s ease,
+          opacity 0.3s ease 0.1s,
+          padding-bottom 0.3s ease;
+}
+
+.accordion__text {
+  color: black;
+  font-size: 1rem;
+  font-family: 'Inter', sans-serif;
+  text-transform: uppercase;
+}
+
+.accordion__content.active {
+  max-height: max-content;
+  opacity: 1;
+  padding-bottom: 1.5rem;
+}
+
+.accordion__button.active {
+  transform: rotate(-45deg);
+}
